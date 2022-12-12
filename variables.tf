@@ -17,3 +17,7 @@ variable "VPC_SUBNET_NAME" {
 variable "INTERNET_GATEWAY_NAME" {
     default = "igw"
 }
+
+variable "SECURITY_GROUP_NAME" {
+    default = "security_group"
+}

@@ -25,3 +25,11 @@ variable "SECURITY_GROUP_NAME" {
 variable "LAMBDA_IAM_NAME" {
     default = "lambda-iam"
 }
+
+variable "LAMBDA_CV_NAME" {
+    default = "cv"
+}
+
+variable "ECR_ROOT_NAME" {
+    default = "502358162358.dkr.ecr.ap-southeast-1.amazonaws.com"
+}

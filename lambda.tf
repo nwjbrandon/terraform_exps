@@ -3,7 +3,7 @@ resource "aws_lambda_function" "test_lambda" {
   # path.module in the filename.
 #   filename      = "lambda_function_payload.zip"
   function_name = "lambda_function_name"
-  role          = aws_iam_role.iam_for_lambda.arn
+  role          = aws_iam_role.lambda_iam.arn
   image_uri     = "502358162358.dkr.ecr.ap-southeast-1.amazonaws.com/nwjbrandon-production-cv:softmark_cv-v0.2.4"
   package_type  = "Image"
 #   handler       = "index.test"

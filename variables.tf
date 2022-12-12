@@ -21,3 +21,7 @@ variable "INTERNET_GATEWAY_NAME" {
 variable "SECURITY_GROUP_NAME" {
     default = "security_group"
 }
+
+variable "LAMBDA_IAM_NAME" {
+    default = "lambda-iam"
+}

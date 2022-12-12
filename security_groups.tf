@@ -1,12 +1,28 @@
 resource "aws_security_group" "ssh" {
-    name        = "allow_tls"
+    name        = "${var.ORGANIZATION_NAME}-${var.SECURITY_GROUP_NAME}-ssh"
     description = "Allow TLS inbound traffic"
     vpc_id      = aws_vpc.vpc.id
 
     ingress {
-        description      = "Allow ssh into ec2"
+        description      = "Allow ssh"
         from_port        = 22
         to_port          = 22
+        protocol         = "tcp"
+        cidr_blocks      = ["0.0.0.0/0"]
+    }
+
+    ingress {
+        description      = "Allow http"
+        from_port        = 80
+        to_port          = 80
+        protocol         = "tcp"
+        cidr_blocks      = ["0.0.0.0/0"]
+    }
+
+    ingress {
+        description      = "Allow https"
+        from_port        = 443
+        to_port          = 443
         protocol         = "tcp"
         cidr_blocks      = ["0.0.0.0/0"]
     }

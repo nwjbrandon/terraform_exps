@@ -33,3 +33,11 @@ variable "LAMBDA_CV_NAME" {
 variable "ECR_ROOT_NAME" {
     default = "502358162358.dkr.ecr.ap-southeast-1.amazonaws.com"
 }
+
+variable "ELASTICACHE_SUBNET_NAME" {
+    default = "elasticache-subnet"  
+}
+
+variable "ELASTICACHE_NAME" {
+    default = "elasticache"
+}

@@ -24,3 +24,12 @@ resource "aws_s3_bucket_policy" "images_get_objects_policy" {
     policy = data.aws_iam_policy_document.s3_get_objects_policy_document.json
 }
 
+resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+    bucket = aws_s3_bucket.images.bucket
+
+    rule {
+        apply_server_side_encryption_by_default {
+            sse_algorithm     = "AES256"
+        }
+    }
+}

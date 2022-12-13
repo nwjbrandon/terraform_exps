@@ -41,3 +41,11 @@ variable "ELASTICACHE_SUBNET_NAME" {
 variable "ELASTICACHE_NAME" {
     default = "elasticache"
 }
+
+variable "POSTGRES_SUBNET_NAME" {
+    default = "postgres-subnet"
+}
+
+variable "POSTGRES_NAME" {
+    default = "postgres"
+}

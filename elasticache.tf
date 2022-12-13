@@ -13,4 +13,5 @@ resource "aws_elasticache_replication_group" "elasticache_redis" {
     subnet_group_name             = "${aws_elasticache_subnet_group.elasticache_subnet.name}"
     num_node_groups               = 1
     at_rest_encryption_enabled    = true
+    security_group_ids            = [aws_security_group.elasticache.id]
 }

@@ -15,5 +15,7 @@ resource "aws_db_instance" "db_postgres" {
     skip_final_snapshot    = true
     db_subnet_group_name   = "${aws_db_subnet_group.rds_subnet.name}"
     deletion_protection    = false
+    multi_az               = true
+    apply_immediately      = true
     vpc_security_group_ids = [aws_security_group.postgres.id]
 }

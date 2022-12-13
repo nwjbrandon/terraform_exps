@@ -17,5 +17,7 @@ resource "aws_db_instance" "db_postgres" {
     deletion_protection    = false
     multi_az               = true
     apply_immediately      = true
+    backup_window          = "14:30-15:00"
+    maintenance_window     = "sat:17:23-sat:17:53"
     vpc_security_group_ids = [aws_security_group.postgres.id]
 }

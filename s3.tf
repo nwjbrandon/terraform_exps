@@ -19,7 +19,7 @@ resource "aws_s3_bucket_cors_configuration" "images_cors_configuration" {
     }
 }
 
-resource "aws_s3_bucket_policy" "s3_get_objects_policy" {
+resource "aws_s3_bucket_policy" "images_get_objects_policy" {
     bucket = aws_s3_bucket.images.id
     policy = data.aws_iam_policy_document.s3_get_objects_policy_document.json
 }

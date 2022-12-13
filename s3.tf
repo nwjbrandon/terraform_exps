@@ -21,10 +21,10 @@ resource "aws_s3_bucket_cors_configuration" "images_cors_configuration" {
 
 resource "aws_s3_bucket_policy" "images_get_objects_policy" {
     bucket = aws_s3_bucket.images.id
-    policy = data.aws_iam_policy_document.s3_get_objects_policy_document.json
+    policy = data.aws_iam_policy_document.s3_read_public_access_policy_document.json
 }
 
-resource "aws_s3_bucket_server_side_encryption_configuration" "example" {
+resource "aws_s3_bucket_server_side_encryption_configuration" "images_server_side_encryption_configuration" {
     bucket = aws_s3_bucket.images.bucket
 
     rule {

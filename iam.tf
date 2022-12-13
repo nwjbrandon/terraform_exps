@@ -3,7 +3,7 @@ resource "aws_iam_role" "lambda_iam_role" {
     assume_role_policy = file("aws_policies/lambda_iam_role_policy.json")
 }
 
-data "aws_iam_policy_document" "s3_get_objects_policy_document" {
+data "aws_iam_policy_document" "s3_read_public_access_policy_document" {
   statement {
     principals {
       type        = "AWS"

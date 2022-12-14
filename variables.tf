@@ -55,3 +55,64 @@ variable "GITHUB_ACCESS_TOKEN" {
 
 variable "TEST" {
 }
+
+variable "APP_URL" {
+}
+
+variable "AWS_ACCESS_KEY_ID" {
+}
+
+variable "AWS_LOG_GROUP_NAME" {
+}
+
+variable "AWS_LOG_STREAM_NAME" {
+}
+
+
+variable "AWS_S3_EXPORTED_PDF_BUCKET" {
+}
+
+variable "AWS_S3_IMAGE_BUCKET" {
+}
+
+variable "AWS_S3_PDF_BUCKET" {
+}
+
+variable "AWS_S3_PDF_UPLOAD_BUCKET" {
+}
+
+variable "AWS_SECRET_ACCESS_KEY" {
+}
+
+variable "DEVELOPER_GROUP_EMAIL" {
+}
+
+variable "JWT_SECRET" {
+}
+
+variable "LISTEN" {
+}
+
+variable "RECAPTCHA_SECRET" {
+}
+
+variable "REDIS_URL" {
+}
+
+variable "ROLLBAR_POST_SERVER_ITEM_ACCESS_TOKEN" {
+}
+
+variable "dbname" {
+}
+
+variable "host" {
+}
+
+variable "password" {
+}
+
+variable "port" {
+}
+
+variable "user" {
+}

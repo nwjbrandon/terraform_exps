@@ -46,35 +46,35 @@ resource "aws_iam_role" "beanstalk_ec2" {
 EOF
 }
 
-resource "aws_iam_policy_attachment" "beanstalk_service" {
-    name = "elastic-beanstalk-service"
-    roles = ["${aws_iam_role.beanstalk_service.id}"]
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkService"
-}
+# resource "aws_iam_policy_attachment" "beanstalk_service" {
+#     name = "elastic-beanstalk-service"
+#     roles = ["${aws_iam_role.beanstalk_service.id}"]
+#     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkService"
+# }
 
-resource "aws_iam_policy_attachment" "beanstalk_service_health" {
-    name = "elastic-beanstalk-service-health"
-    roles = ["${aws_iam_role.beanstalk_service.id}"]
-    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth"
-}
+# resource "aws_iam_policy_attachment" "beanstalk_service_health" {
+#     name = "elastic-beanstalk-service-health"
+#     roles = ["${aws_iam_role.beanstalk_service.id}"]
+#     policy_arn = "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth"
+# }
 
-resource "aws_iam_policy_attachment" "beanstalk_ec2_worker" {
-    name = "elastic-beanstalk-ec2-worker"
-    roles = ["${aws_iam_role.beanstalk_ec2.id}"]
-    policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
-}
+# resource "aws_iam_policy_attachment" "beanstalk_ec2_worker" {
+#     name = "elastic-beanstalk-ec2-worker"
+#     roles = ["${aws_iam_role.beanstalk_ec2.id}"]
+#     policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
+# }
 
-resource "aws_iam_policy_attachment" "beanstalk_ec2_web" {
-    name = "elastic-beanstalk-ec2-web"
-    roles = ["${aws_iam_role.beanstalk_ec2.id}"]
-    policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
-}
+# resource "aws_iam_policy_attachment" "beanstalk_ec2_web" {
+#     name = "elastic-beanstalk-ec2-web"
+#     roles = ["${aws_iam_role.beanstalk_ec2.id}"]
+#     policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+# }
 
-resource "aws_iam_policy_attachment" "beanstalk_ec2_container" {
-    name = "elastic-beanstalk-ec2-container"
-    roles = ["${aws_iam_role.beanstalk_ec2.id}"]
-    policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
-}
+# resource "aws_iam_policy_attachment" "beanstalk_ec2_container" {
+#     name = "elastic-beanstalk-ec2-container"
+#     roles = ["${aws_iam_role.beanstalk_ec2.id}"]
+#     policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
+# }
 
 resource "aws_elastic_beanstalk_application" "tftest" {
   name        = "tf-test-name"
@@ -128,13 +128,13 @@ resource "aws_elastic_beanstalk_environment" "tfenvtest" {
     setting {
         namespace = "aws:elasticbeanstalk:environment"
         name      = "ServiceRole"
-        value     = "${aws_iam_instance_profile.beanstalk_service.name}"
+        value     = "aws-elasticbeanstalk-service-role"
     }
 
     setting {
         namespace = "aws:autoscaling:launchconfiguration"
         name      = "IamInstanceProfile"
-        value     = "${aws_iam_instance_profile.beanstalk_ec2.name}"
+        value     = "aws-elasticbeanstalk-ec2-role"
     }
 
     setting {

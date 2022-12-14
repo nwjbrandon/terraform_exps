@@ -49,3 +49,9 @@ variable "POSTGRES_SUBNET_NAME" {
 variable "POSTGRES_NAME" {
     default = "postgres"
 }
+
+variable "GITHUB_ACCESS_TOKEN" {
+}
+
+variable "TEST" {
+}

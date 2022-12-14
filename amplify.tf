@@ -38,10 +38,10 @@
 
 
 resource "aws_amplify_app" "the-best-app" {
-  name       = "The Best App"
+  name       = "${var.TEST}"
   repository = "https://github.com/ai-cet/Softmark"
 
-  access_token = ""
+  access_token = "${var.GITHUB_ACCESS_TOKEN}"
 #   iam_service_role_arn = aws_iam_role.amplify-codecommit.arn
   enable_branch_auto_build = true
   build_spec = <<-EOT

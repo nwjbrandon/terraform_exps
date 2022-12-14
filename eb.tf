@@ -81,6 +81,7 @@ resource "aws_elastic_beanstalk_application" "tftest" {
   description = "tf-test-desc"
 }
 # https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.docker
+# https://github.com/cloudposse/terraform-aws-elastic-beanstalk-environment
 resource "aws_elastic_beanstalk_environment" "tfenvtest" {
   name                = "tf-test-name"
   application         = aws_elastic_beanstalk_application.tftest.name
@@ -98,13 +99,13 @@ resource "aws_elastic_beanstalk_environment" "tfenvtest" {
     setting {
         namespace = "aws:ec2:vpc"
         name      = "Subnets"
-        value     = "${aws_subnet.public-subnet-1.id}"
+        value     = "${aws_subnet.public-subnet-1.id},${aws_subnet.public-subnet-2.id}"
     }
   
     setting {
         namespace = "aws:ec2:vpc"
         name      = "ELBSubnets"
-        value     = "${aws_subnet.public-subnet-1.id}"
+        value     = "${aws_subnet.public-subnet-1.id},${aws_subnet.public-subnet-2.id}"
     } 
   
     setting {
@@ -135,6 +136,18 @@ resource "aws_elastic_beanstalk_environment" "tfenvtest" {
         namespace = "aws:autoscaling:launchconfiguration"
         name      = "IamInstanceProfile"
         value     = "aws-elasticbeanstalk-ec2-role"
+    }
+
+    setting {
+        namespace = "aws:elasticbeanstalk:environment"
+        name      = "LoadBalancerType"
+        value     = "application"
+    }
+
+    setting {
+      namespace = "aws:elasticbeanstalk:environment:process:default"
+      name      = "HealthCheckPath"
+      value     = "/health"
     }
 
     setting {

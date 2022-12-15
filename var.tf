@@ -21,6 +21,9 @@ variable "INTERNET_GATEWAY_NAMESPACE" {
   default = "igw"
 }
 
+variable "KEYPAIR_NAME" {
+}
+
 variable "LAMBDA_CV_NAMESPACE" {
   default = "cv"
 }
@@ -48,97 +51,68 @@ variable "VPC_SUBNET_NAMESPACE" {
   default = "vpc-subnet"
 }
 
-
-
-
-
-
-
-
-
-
-# variable "VPC_SUBNET_NAME" {
-#     default = "vpc-subnet"
-# }
-
-
-
-# variable "SECURITY_GROUP_NAME" {
-#     default = "security_group"
-# }
-
-
-# variable "LAMBDA_CV_NAME" {
-#     default = "cv"
-# }
-
-
-
-
-
 # variable "GITHUB_ACCESS_TOKEN" {
 # }
 
-# variable "TEST" {
-# }
+##########################
+# Env: Elastic Beanstalk #
+##########################
+variable "APP_URL" {
+}
 
-# variable "APP_URL" {
-# }
+variable "AWS_ACCESS_KEY_ID" {
+}
 
-# variable "AWS_ACCESS_KEY_ID" {
-# }
+variable "AWS_LOG_GROUP_NAME" {
+}
 
-# variable "AWS_LOG_GROUP_NAME" {
-# }
+variable "AWS_LOG_STREAM_NAME" {
+}
 
-# variable "AWS_LOG_STREAM_NAME" {
-# }
+variable "AWS_S3_EXPORTED_PDF_BUCKET" {
+}
 
+variable "AWS_S3_IMAGE_BUCKET" {
+}
 
-# variable "AWS_S3_EXPORTED_PDF_BUCKET" {
-# }
+variable "AWS_S3_PDF_BUCKET" {
+}
 
-# variable "AWS_S3_IMAGE_BUCKET" {
-# }
+variable "AWS_S3_PDF_UPLOAD_BUCKET" {
+}
 
-# variable "AWS_S3_PDF_BUCKET" {
-# }
+variable "AWS_SECRET_ACCESS_KEY" {
+}
 
-# variable "AWS_S3_PDF_UPLOAD_BUCKET" {
-# }
+variable "DEVELOPER_GROUP_EMAIL" {
+}
 
-# variable "AWS_SECRET_ACCESS_KEY" {
-# }
+variable "JWT_SECRET" {
+}
 
-# variable "DEVELOPER_GROUP_EMAIL" {
-# }
+variable "LISTEN" {
+}
 
-# variable "JWT_SECRET" {
-# }
+variable "RECAPTCHA_SECRET" {
+}
 
-# variable "LISTEN" {
-# }
+variable "REDIS_URL" {
+}
 
-# variable "RECAPTCHA_SECRET" {
-# }
+variable "ROLLBAR_POST_SERVER_ITEM_ACCESS_TOKEN" {
+}
 
-# variable "REDIS_URL" {
-# }
+variable "dbname" {
+}
 
-# variable "ROLLBAR_POST_SERVER_ITEM_ACCESS_TOKEN" {
-# }
+variable "host" {
+}
 
-# variable "dbname" {
-# }
+variable "password" {
+}
 
-# variable "host" {
-# }
+variable "port" {
+}
 
-# variable "password" {
-# }
-
-# variable "port" {
-# }
-
-# variable "user" {
-# }
+variable "user" {
+}

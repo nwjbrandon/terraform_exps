@@ -39,3 +39,7 @@ psql --host={db_instance_endpoint} --port={port} --username={username} --passwor
 ## Not Covered
 1. Create groups
 2. Create domain names and SSL certs
+
+## References
+- https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.docker
+- https://github.com/cloudposse/terraform-aws-elastic-beanstalk-environment

@@ -54,6 +54,33 @@ variable "VPC_SUBNET_NAMESPACE" {
   default = "vpc-subnet"
 }
 
+################
+# Env: Amplify #
+################
+variable "AMPLIFY_DIFF_DEPLOY" {
+}
+
+variable "REACT_APP_BASE_URL" {
+}
+
+variable "REACT_APP_BASE_URL_DEV" {
+}
+
+variable "REACT_APP_DD_APP_ID" {
+}
+
+variable "REACT_APP_DD_CLIENT_TOKEN" {
+}
+
+variable "REACT_APP_DD_ENV" {
+}
+
+variable "REACT_APP_RECAPTCHA_SITE_KEY" {
+}
+
+variable "REACT_APP_ROLLBAR_POST_CLIENT_ITEM_KEY" {
+}
+
 ##########################
 # Env: Elastic Beanstalk #
 ##########################

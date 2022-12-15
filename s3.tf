@@ -334,3 +334,96 @@ data "aws_iam_policy_document" "pdf-dev_policy_document" {
     ]
   }
 }
+
+######################
+#                    #
+# Bucket: pdf-upload #
+#                    #
+######################
+resource "aws_s3_bucket" "pdf-upload" {
+  bucket = "${var.ORGANIZATION_NAMESPACE}-pdf-upload"
+}
+
+resource "aws_s3_bucket_acl" "pdf-upload_acl" {
+  bucket = aws_s3_bucket.pdf-upload.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_cors_configuration" "pdf-upload_cors_configuration" {
+  bucket = aws_s3_bucket.pdf-upload.id
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "HEAD", "PUT"]
+    allowed_origins = ["*"]
+    expose_headers  = []
+    max_age_seconds = 3000
+  }
+}
+
+resource "aws_s3_bucket_policy" "pdf-upload_get_objects_policy" {
+  bucket = aws_s3_bucket.pdf-upload.id
+  policy = data.aws_iam_policy_document.pdf-upload_policy_document.json
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "pdf-upload_server_side_encryption_configuration" {
+  bucket = aws_s3_bucket.pdf-upload.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+data "aws_iam_policy_document" "pdf-upload_policy_document" {
+  statement {
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:PutObject"
+    ]
+
+    resources = [
+      aws_s3_bucket.pdf-upload.arn,
+      "${aws_s3_bucket.pdf-upload.arn}/*",
+    ]
+  }
+
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      aws_s3_bucket.pdf-upload.arn,
+      "${aws_s3_bucket.pdf-upload.arn}/*",
+    ]
+  }
+
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:DeleteBucket",
+    ]
+
+    effect = "Deny"
+
+    resources = [
+      aws_s3_bucket.pdf-upload.arn,
+      "${aws_s3_bucket.pdf-upload.arn}/*",
+    ]
+  }
+}

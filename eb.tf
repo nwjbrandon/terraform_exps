@@ -14,6 +14,12 @@ resource "aws_iam_policy_attachment" "eb_managed_updates_customer_role_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy"
 }
 
+resource "aws_iam_policy_attachment" "eb_enhanced_health" {
+  name       = "${var.ORGANIZATION_NAMESPACE}_eb_enhanced_health"
+  roles      = ["${aws_iam_role.eb_iam_service_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth"
+}
+
 resource "aws_iam_role" "eb_iam_ec2_role" {
   name               = "${var.ORGANIZATION_NAMESPACE}_eb_iam_ec2_role"
   assume_role_policy = file("aws_policies/eb_iam_ec2_role_policy.json")
@@ -24,10 +30,34 @@ resource "aws_iam_instance_profile" "eb_iam_ec2_profile" {
   role = aws_iam_role.eb_iam_ec2_role.name
 }
 
-resource "aws_iam_policy_attachment" "eb_ecr_full_access" {
-  name       = "${var.ORGANIZATION_NAMESPACE}_eb_ecr_full_access"
+resource "aws_iam_policy_attachment" "eb_ec2_container_registry_full_access" {
+  name       = "${var.ORGANIZATION_NAMESPACE}_eb_ec2_container_registry_full_access"
   roles      = ["${aws_iam_role.eb_iam_ec2_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
+}
+
+resource "aws_iam_policy_attachment" "eb_ecr_public_read_only" {
+  name       = "${var.ORGANIZATION_NAMESPACE}_eb_ecr_public_read_only"
+  roles      = ["${aws_iam_role.eb_iam_ec2_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly"
+}
+
+resource "aws_iam_policy_attachment" "eb_web_tier" {
+  name       = "${var.ORGANIZATION_NAMESPACE}_eb_web_tier"
+  roles      = ["${aws_iam_role.eb_iam_ec2_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
+}
+
+resource "aws_iam_policy_attachment" "eb_multicontainer_docker" {
+  name       = "${var.ORGANIZATION_NAMESPACE}_eb_multicontainer_docker"
+  roles      = ["${aws_iam_role.eb_iam_ec2_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
+}
+
+resource "aws_iam_policy_attachment" "eb_ecr_worker_tier" {
+  name       = "${var.ORGANIZATION_NAMESPACE}_eb_ecr_worker_tier"
+  roles      = ["${aws_iam_role.eb_iam_ec2_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
 }
 
 resource "aws_elastic_beanstalk_application" "eb_app" {
@@ -36,7 +66,7 @@ resource "aws_elastic_beanstalk_application" "eb_app" {
 }
 
 resource "aws_elastic_beanstalk_environment" "eb_env" {
-  name                = "${var.ORGANIZATION_NAMESPACE}-env-0"
+  name                = "${var.ORGANIZATION_NAMESPACE}-env-1"
   application         = aws_elastic_beanstalk_application.eb_app.name
   solution_stack_name = "64bit Amazon Linux 2 v3.5.2 running Docker"
   tier                = "WebServer"

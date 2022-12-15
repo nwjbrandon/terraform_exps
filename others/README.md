@@ -1,6 +1,7 @@
 # Terraform DeveOps
 
 ## Deploy
+- Create keypair through AWS console (Skip if done)
 - Validate and plan resources
 ```
 terraform validate 
@@ -34,3 +35,7 @@ psql --host={db_instance_endpoint} --port={port} --username={username} --passwor
 
 ## Issues
 1. Push the docker images to ecr and continue deploying if first attempt failed
+
+## Not Covered
+1. Create groups
+2. Create domain names and SSL certs

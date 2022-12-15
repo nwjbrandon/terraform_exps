@@ -29,7 +29,7 @@ redis-cli -c -h {redis_instance_endpoint} -p 6379
 ```
 - Check postgres connection
 ```
-psql --host={db_instance_endpoint} --port=port --username=master_user_name --password --dbname=database_name
+psql --host={db_instance_endpoint} --port={port} --username={username} --password --dbname={database_name}
 ```
 
 ## Issues

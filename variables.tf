@@ -1,9 +1,23 @@
+variable "AWS_ACCOUNT_NUMBER" {
+}
+
 variable "AWS_REGION" {
   default = "ap-southeast-1"
 }
 
+variable "IAM_ROLE_NAMESPACE" {
+  default = "iam-role"
+}
+
+variable "LAMBDA_CV_NAMESPACE" {
+  default = "cv"
+}
+
 variable "ORGANIZATION_NAMESPACE" {
-  default = "nwjbrandon"
+}
+
+variable "SECURITY_GROUP_NAMESPACE" {
+  default = "security-group"
 }
 
 variable "VPC_NAMESPACE" {
@@ -14,13 +28,13 @@ variable "VPC_SUBNET_NAMESPACE" {
   default = "vpc-subnet"
 }
 
-variable "SECURITY_GROUP_NAMESPACE" {
-  default = "security-group"
-}
 
-variable "LAMBDA_IAM_ROLE_NAMESPACE" {
-  default = "lambda-iam-role"
-}
+
+
+
+
+
+
 
 
 # variable "VPC_SUBNET_NAME" {
@@ -40,9 +54,6 @@ variable "LAMBDA_IAM_ROLE_NAMESPACE" {
 #     default = "cv"
 # }
 
-# variable "ECR_ROOT_NAME" {
-#     default = "502358162358.dkr.ecr.ap-southeast-1.amazonaws.com"
-# }
 
 # variable "ELASTICACHE_SUBNET_NAME" {
 #     default = "elasticache-subnet"  

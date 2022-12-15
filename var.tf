@@ -5,6 +5,14 @@ variable "AWS_REGION" {
   default = "ap-southeast-1"
 }
 
+variable "ELASTICACHE_NAMESPACE" {
+  default = "elasticache"
+}
+
+variable "ELASTICACHE_SUBNET_NAMESPACE" {
+  default = "elasticache-subnet"
+}
+
 variable "IAM_ROLE_NAMESPACE" {
   default = "iam-role"
 }
@@ -65,13 +73,7 @@ variable "VPC_SUBNET_NAMESPACE" {
 # }
 
 
-# variable "ELASTICACHE_SUBNET_NAME" {
-#     default = "elasticache-subnet"  
-# }
 
-# variable "ELASTICACHE_NAME" {
-#     default = "elasticache"
-# }
 
 
 # variable "GITHUB_ACCESS_TOKEN" {

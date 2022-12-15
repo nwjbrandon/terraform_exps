@@ -61,7 +61,7 @@ data "aws_iam_policy_document" "exported-pdfs_policy_document" {
 
 ##################
 #                #
-# Bucket: Images #
+# Bucket: images #
 #                #
 ##################
 resource "aws_s3_bucket" "images" {
@@ -132,6 +132,83 @@ data "aws_iam_policy_document" "images_policy_document" {
     resources = [
       aws_s3_bucket.images.arn,
       "${aws_s3_bucket.images.arn}/*",
+    ]
+  }
+}
+
+######################
+#                    #
+# Bucket: images-dev #
+#                    #
+######################
+resource "aws_s3_bucket" "images-dev" {
+    bucket = "${var.ORGANIZATION_NAMESPACE}-images-dev"
+}
+
+resource "aws_s3_bucket_acl" "images-dev_acl" {
+    bucket = aws_s3_bucket.images-dev.id
+    acl    = "private"
+}
+
+resource "aws_s3_bucket_cors_configuration" "images-dev_cors_configuration" {
+    bucket = aws_s3_bucket.images-dev.id
+
+    cors_rule {
+        allowed_headers = ["*"]
+        allowed_methods = ["GET", "HEAD"]
+        allowed_origins = ["*"]
+        expose_headers  = []
+        max_age_seconds = 3000
+    }
+}
+
+resource "aws_s3_bucket_policy" "images-dev_get_objects_policy" {
+    bucket = aws_s3_bucket.images-dev.id
+    policy = data.aws_iam_policy_document.images-dev_policy_document.json
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "images-dev_server_side_encryption_configuration" {
+    bucket = aws_s3_bucket.images-dev.bucket
+
+    rule {
+        apply_server_side_encryption_by_default {
+            sse_algorithm     = "AES256"
+        }
+    }
+}
+
+data "aws_iam_policy_document" "images-dev_policy_document" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      aws_s3_bucket.images-dev.arn,
+      "${aws_s3_bucket.images-dev.arn}/*",
+    ]
+  }
+  
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:DeleteBucket",
+    ]
+
+    effect = "Deny"
+
+    resources = [
+      aws_s3_bucket.images-dev.arn,
+      "${aws_s3_bucket.images-dev.arn}/*",
     ]
   }
 }

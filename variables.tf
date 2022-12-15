@@ -18,6 +18,9 @@ variable "SECURITY_GROUP_NAMESPACE" {
   default = "security-group"
 }
 
+variable "LAMBDA_IAM_ROLE_NAMESPACE" {
+  default = "lambda-iam-role"
+}
 
 
 # variable "VPC_SUBNET_NAME" {
@@ -32,9 +35,6 @@ variable "SECURITY_GROUP_NAMESPACE" {
 #     default = "security_group"
 # }
 
-# variable "LAMBDA_IAM_ROLE_NAME" {
-#     default = "lambda-iam-role"
-# }
 
 # variable "LAMBDA_CV_NAME" {
 #     default = "cv"

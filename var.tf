@@ -10,7 +10,7 @@ variable "IAM_ROLE_NAMESPACE" {
 }
 
 variable "INTERNET_GATEWAY_NAMESPACE" {
-    default = "igw"
+  default = "igw"
 }
 
 variable "LAMBDA_CV_NAMESPACE" {

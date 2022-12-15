@@ -30,8 +30,7 @@ applications:
   }
   environment_variables = {
     AMPLIFY_DIFF_DEPLOY                    = var.AMPLIFY_DIFF_DEPLOY
-    REACT_APP_BASE_URL                     = var.REACT_APP_BASE_URL
-    REACT_APP_BASE_URL_DEV                 = var.REACT_APP_BASE_URL_DEV
+    REACT_APP_BASE_URL                     = var.REACT_APP_BASE_URL_DEV
     REACT_APP_DD_APP_ID                    = var.REACT_APP_DD_APP_ID
     REACT_APP_DD_CLIENT_TOKEN              = var.REACT_APP_DD_CLIENT_TOKEN
     REACT_APP_DD_ENV                       = var.REACT_APP_DD_ENV
@@ -53,4 +52,7 @@ resource "aws_amplify_branch" "main" {
   branch_name = "main"
   framework   = "React"
   stage       = "PRODUCTION"
+  environment_variables = {
+    REACT_APP_BASE_URL                     = var.REACT_APP_BASE_URL
+  }
 }

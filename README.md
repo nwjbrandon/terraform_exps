@@ -43,3 +43,4 @@ psql --host={db_instance_endpoint} --port={port} --username={username} --passwor
 ## References
 - https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.docker
 - https://github.com/cloudposse/terraform-aws-elastic-beanstalk-environment
+- https://automateinfra.com/2021/03/24/how-to-launch-aws-elastic-beanstalk-using-terraform/

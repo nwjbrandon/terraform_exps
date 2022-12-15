@@ -1,14 +1,11 @@
-# variable "AWS_REGION" {    
-#     default = "ap-southeast-1"
-# }
+variable "AWS_REGION_NAMESPACE" {
+  default = "ap-southeast-1"
+}
 
-# variable "ORGANIZATION_NAME" {
-#     default = "nwjbrandon-production"
-# }
+variable "ORGANIZATION_NAMESPACE" {
+  default = "nwjbrandon"
+}
 
-# variable "VPC_NAME" {
-#     default = "vpc"
-# }
 
 # variable "VPC_SUBNET_NAME" {
 #     default = "vpc-subnet"

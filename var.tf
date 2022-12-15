@@ -13,6 +13,9 @@ variable "ELASTICACHE_SUBNET_NAMESPACE" {
   default = "elasticache-subnet"
 }
 
+variable "GITHUB_ACCESS_TOKEN" {
+}
+
 variable "IAM_ROLE_NAMESPACE" {
   default = "iam-role"
 }
@@ -50,9 +53,6 @@ variable "VPC_NAMESPACE" {
 variable "VPC_SUBNET_NAMESPACE" {
   default = "vpc-subnet"
 }
-
-# variable "GITHUB_ACCESS_TOKEN" {
-# }
 
 ##########################
 # Env: Elastic Beanstalk #

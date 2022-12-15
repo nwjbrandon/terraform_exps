@@ -1,31 +1,31 @@
 resource "aws_iam_role" "eb_iam_service_role" {
-  name               = "eb_iam_service_role"
+  name               = "${var.ORGANIZATION_NAMESPACE}_eb_iam_service_role"
   assume_role_policy = file("aws_policies/eb_iam_service_role_policy.json")
 }
 
 resource "aws_iam_instance_profile" "eb_iam_service_profile" {
-  name = "eb_iam_service_profile"
+  name = "${var.ORGANIZATION_NAMESPACE}_eb_iam_service_profile"
   role = aws_iam_role.eb_iam_service_role.name
 }
 
 resource "aws_iam_policy_attachment" "eb_managed_updates_customer_role_policy" {
-  name       = "eb_managed_updates_customer_role_policy"
+  name       = "${var.ORGANIZATION_NAMESPACE}_eb_managed_updates_customer_role_policy"
   roles      = ["${aws_iam_role.eb_iam_service_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy"
 }
 
 resource "aws_iam_role" "eb_iam_ec2_role" {
-  name               = "eb_iam_ec2_role"
+  name               = "${var.ORGANIZATION_NAMESPACE}_eb_iam_ec2_role"
   assume_role_policy = file("aws_policies/eb_iam_ec2_role_policy.json")
 }
 
 resource "aws_iam_instance_profile" "eb_iam_ec2_profile" {
-  name = "eb_iam_ec2_profile"
+  name = "${var.ORGANIZATION_NAMESPACE}_eb_iam_ec2_profile"
   role = aws_iam_role.eb_iam_ec2_role.name
 }
 
 resource "aws_iam_policy_attachment" "eb_ecr_full_access" {
-  name       = "eb_ecr_full_access"
+  name       = "${var.ORGANIZATION_NAMESPACE}_eb_ecr_full_access"
   roles      = ["${aws_iam_role.eb_iam_ec2_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
 }
@@ -35,7 +35,7 @@ resource "aws_elastic_beanstalk_application" "eb_app" {
   description = "${var.ORGANIZATION_NAMESPACE}-app"
 }
 
-resource "aws_elastic_beanstalk_environment" "tfenvtest" {
+resource "aws_elastic_beanstalk_environment" "eb_env" {
   name                = "${var.ORGANIZATION_NAMESPACE}-env-0"
   application         = aws_elastic_beanstalk_application.eb_app.name
   solution_stack_name = "64bit Amazon Linux 2 v3.5.2 running Docker"

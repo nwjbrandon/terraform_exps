@@ -20,6 +20,14 @@ variable "LAMBDA_CV_NAMESPACE" {
 variable "ORGANIZATION_NAMESPACE" {
 }
 
+variable "POSTGRES_NAMESPACE" {
+  default = "postgres"
+}
+
+variable "POSTGRES_SUBNET_NAMESPACE" {
+  default = "postgres-subnet"
+}
+
 variable "SECURITY_GROUP_NAMESPACE" {
   default = "security-group"
 }
@@ -65,13 +73,6 @@ variable "VPC_SUBNET_NAMESPACE" {
 #     default = "elasticache"
 # }
 
-# variable "POSTGRES_SUBNET_NAME" {
-#     default = "postgres-subnet"
-# }
-
-# variable "POSTGRES_NAME" {
-#     default = "postgres"
-# }
 
 # variable "GITHUB_ACCESS_TOKEN" {
 # }

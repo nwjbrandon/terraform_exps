@@ -9,6 +9,10 @@ variable "IAM_ROLE_NAMESPACE" {
   default = "iam-role"
 }
 
+variable "INTERNET_GATEWAY_NAMESPACE" {
+    default = "igw"
+}
+
 variable "LAMBDA_CV_NAMESPACE" {
   default = "cv"
 }
@@ -41,9 +45,7 @@ variable "VPC_SUBNET_NAMESPACE" {
 #     default = "vpc-subnet"
 # }
 
-# variable "INTERNET_GATEWAY_NAME" {
-#     default = "igw"
-# }
+
 
 # variable "SECURITY_GROUP_NAME" {
 #     default = "security_group"

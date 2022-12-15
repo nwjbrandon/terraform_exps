@@ -25,11 +25,11 @@ deletion_protection=true
 ## Check Host Connection
 - Check redis connection
 ```
-redis-cli -c -h nwjbrandon-production-elasticache.r78hd4.ng.0001.apse1.cache.amazonaws.com -p 6379
+redis-cli -c -h {redis_instance_endpoint} -p 6379
 ```
 - Check postgres connection
 ```
-psql --host=DB_instance_endpoint --port=port --username=master_user_name --password --dbname=database_name
+psql --host={db_instance_endpoint} --port=port --username=master_user_name --password --dbname=database_name
 ```
 
 ## Issues

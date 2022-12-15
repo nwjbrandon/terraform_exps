@@ -6,6 +6,19 @@ variable "ORGANIZATION_NAMESPACE" {
   default = "nwjbrandon"
 }
 
+variable "VPC_NAMESPACE" {
+  default = "vpc"
+}
+
+variable "VPC_SUBNET_NAMESPACE" {
+  default = "vpc-subnet"
+}
+
+variable "SECURITY_GROUP_NAMESPACE" {
+  default = "security-group"
+}
+
+
 
 # variable "VPC_SUBNET_NAME" {
 #     default = "vpc-subnet"

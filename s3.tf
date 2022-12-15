@@ -427,3 +427,68 @@ data "aws_iam_policy_document" "pdf-upload_policy_document" {
     ]
   }
 }
+
+##################
+#                #
+# Bucket: static #
+#                #
+##################
+resource "aws_s3_bucket" "static" {
+  bucket = "${var.ORGANIZATION_NAMESPACE}-static"
+}
+
+resource "aws_s3_bucket_acl" "static_acl" {
+  bucket = aws_s3_bucket.static.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_policy" "static_get_objects_policy" {
+  bucket = aws_s3_bucket.static.id
+  policy = data.aws_iam_policy_document.static_policy_document.json
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "static_server_side_encryption_configuration" {
+  bucket = aws_s3_bucket.static.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+data "aws_iam_policy_document" "static_policy_document" {
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      aws_s3_bucket.static.arn,
+      "${aws_s3_bucket.static.arn}/*",
+    ]
+  }
+
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:DeleteBucket",
+    ]
+
+    effect = "Deny"
+
+    resources = [
+      aws_s3_bucket.static.arn,
+      "${aws_s3_bucket.static.arn}/*",
+    ]
+  }
+}

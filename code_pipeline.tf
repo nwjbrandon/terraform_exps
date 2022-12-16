@@ -27,7 +27,7 @@ resource "aws_codepipeline" "codepipeline" {
       owner            = "AWS"
       provider         = "CodeStarSourceConnection"
       version          = "1"
-      output_artifacts = ["source_output"]
+      output_artifacts = ["SourceOutput"]
 
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.example.arn
@@ -45,12 +45,12 @@ resource "aws_codepipeline" "codepipeline" {
       category         = "Build"
       owner            = "AWS"
       provider         = "CodeBuild"
-      input_artifacts  = ["source_output"]
-      output_artifacts = ["build_output"]
+      input_artifacts  = ["SourceOutput"]
+      output_artifacts = ["BuildOutput"]
       version          = "1"
 
       configuration = {
-        ProjectName = "test"
+        ProjectName = aws_codebuild_project.codebuild.name
       }
     }
   }

@@ -93,3 +93,9 @@ resource "aws_iam_policy_attachment" "AmazonElasticContainerRegistryPublicFullAc
   roles      = ["${aws_iam_role.codebuild_iam_service_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicFullAccess"
 }
+
+resource "aws_iam_policy_attachment" "AWSCodeStarServiceRole" {
+  name       = "AWSCodeStarServiceRole"
+  roles      = ["${aws_iam_role.codebuild_iam_service_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSCodeStarServiceRole"
+}

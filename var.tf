@@ -143,3 +143,12 @@ variable "port" {
 
 variable "user" {
 }
+
+##################
+# Env: CodeBuild #
+##################
+variable "GITHUB_URL" {
+}
+
+variable "GITHUB_BRANCH" {
+}

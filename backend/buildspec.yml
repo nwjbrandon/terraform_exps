@@ -16,8 +16,6 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
-  deploy_build:
-    commands:
       - echo Deploying the Docker image...
-      - python3 main.py --image_uri=$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - python3 main.py --image_uri $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
       - cat Dockerrun.aws.json

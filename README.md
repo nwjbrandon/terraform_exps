@@ -1,13 +1,14 @@
-# Terraform DeveOps
+# Terraform DevOps
 
 ## Deploy
 - Create keypair through AWS console (Skip if done)
+- Replace files with extension *.template.tfvars to *.auto.tfvars
 - Validate and plan resources
 ```
 terraform validate 
 terraform plan
 ```
-- Deploy (Deploy lambda last because docker image needs to be uploaded first)
+- Deploy (Comment code for lambda and codepipeline to deploy latter)
 ```
 terraform deploy
 ```
@@ -32,9 +33,6 @@ redis-cli -c -h {redis_instance_endpoint} -p 6379
 ```
 psql --host={db_instance_endpoint} --port={port} --username={username} --password --dbname={database_name}
 ```
-
-## Issues
-1. Push the docker images to ecr and continue deploying if first attempt failed
 
 ## Not Covered
 1. Codepipeline connection

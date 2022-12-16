@@ -1,0 +1,3 @@
+GITHUB_URL     = ""
+GITHUB_REPO_ID = ""
+GITHUB_BRANCH  = ""

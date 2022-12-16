@@ -1,0 +1,8 @@
+AMPLIFY_DIFF_DEPLOY                    = ""
+REACT_APP_BASE_URL                     = ""
+REACT_APP_BASE_URL_DEV                 = ""
+REACT_APP_DD_APP_ID                    = ""
+REACT_APP_DD_CLIENT_TOKEN              = ""
+REACT_APP_DD_ENV                       = ""
+REACT_APP_RECAPTCHA_SITE_KEY           = ""
+REACT_APP_ROLLBAR_POST_CLIENT_ITEM_KEY = ""

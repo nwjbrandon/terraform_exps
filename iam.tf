@@ -8,9 +8,24 @@ resource "aws_iam_role" "eb_iam_service_role" {
   assume_role_policy = file("aws_policies/eb_iam_service_role_policy.json")
 }
 
+resource "aws_iam_role" "eb_iam_ec2_role" {
+  name               = "${var.ORGANIZATION_NAMESPACE}_eb_iam_ec2_role"
+  assume_role_policy = file("aws_policies/eb_iam_ec2_role_policy.json")
+}
+
+resource "aws_iam_role" "codebuild_iam_service_role" {
+  name               = "${var.ORGANIZATION_NAMESPACE}_codebuild_iam_service_role"
+  assume_role_policy = file("aws_policies/codebuild_iam_service_role_policy.json")
+}
+
 resource "aws_iam_instance_profile" "eb_iam_service_profile" {
   name = "${var.ORGANIZATION_NAMESPACE}_eb_iam_service_profile"
   role = aws_iam_role.eb_iam_service_role.name
+}
+
+resource "aws_iam_instance_profile" "eb_iam_ec2_profile" {
+  name = "${var.ORGANIZATION_NAMESPACE}_eb_iam_ec2_profile"
+  role = aws_iam_role.eb_iam_ec2_role.name
 }
 
 resource "aws_iam_policy_attachment" "eb_managed_updates_customer_role_policy" {
@@ -23,16 +38,6 @@ resource "aws_iam_policy_attachment" "eb_enhanced_health" {
   name       = "${var.ORGANIZATION_NAMESPACE}_eb_enhanced_health"
   roles      = ["${aws_iam_role.eb_iam_service_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth"
-}
-
-resource "aws_iam_role" "eb_iam_ec2_role" {
-  name               = "${var.ORGANIZATION_NAMESPACE}_eb_iam_ec2_role"
-  assume_role_policy = file("aws_policies/eb_iam_ec2_role_policy.json")
-}
-
-resource "aws_iam_instance_profile" "eb_iam_ec2_profile" {
-  name = "${var.ORGANIZATION_NAMESPACE}_eb_iam_ec2_profile"
-  role = aws_iam_role.eb_iam_ec2_role.name
 }
 
 resource "aws_iam_policy_attachment" "eb_ec2_container_registry_full_access" {
@@ -63,4 +68,16 @@ resource "aws_iam_policy_attachment" "eb_ecr_worker_tier" {
   name       = "${var.ORGANIZATION_NAMESPACE}_eb_ecr_worker_tier"
   roles      = ["${aws_iam_role.eb_iam_ec2_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
+}
+
+resource "aws_iam_policy_attachment" "AWSCodeBuildDeveloperAccess" {
+  name       = "AWSCodeBuildDeveloperAccess"
+  roles      = ["${aws_iam_role.codebuild_iam_service_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess"
+}
+
+resource "aws_iam_policy_attachment" "AWSCodePipeline_FullAccess" {
+  name       = "AWSCodePipeline_FullAccess"
+  roles      = ["${aws_iam_role.codebuild_iam_service_role.id}"]
+  policy_arn = "arn:aws:iam::aws:policy/AWSCodePipeline_FullAccess"
 }

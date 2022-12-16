@@ -7,7 +7,7 @@ resource "aws_codebuild_source_credential" "codebuild_credential" {
 resource "aws_codebuild_project" "codebuild" {
   name           = "${var.ORGANIZATION_NAMESPACE}-codebuild"
   build_timeout  = "60"
-  service_role   = "arn:aws:iam::502358162358:role/service-role/codebuild-nwjbrandon-build-service-role"
+  service_role   = aws_iam_role.codebuild_iam_service_role.arn
   source_version = var.GITHUB_BRANCH
 
   source {

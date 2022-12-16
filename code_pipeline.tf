@@ -6,7 +6,7 @@ resource "aws_codestarconnections_connection" "example" {
 
 resource "aws_codepipeline" "codepipeline" {
   name     = "${var.ORGANIZATION_NAMESPACE}-pipeline"
-  role_arn = "arn:aws:iam::502358162358:role/service-role/my_code_pipeline"
+  role_arn = aws_iam_role.codebuild_iam_service_role.arn
 
   artifact_store {
     location = aws_s3_bucket.terraform-deployment.bucket

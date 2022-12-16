@@ -15,10 +15,6 @@ resource "aws_codebuild_project" "codebuild" {
     location        = var.GITHUB_URL
     git_clone_depth = 1
     buildspec       = "backend/buildspec.yml"
-    auth {
-      type     = "OAUTH"
-      resource = aws_codebuild_source_credential.codebuild_credential.arn
-    }
   }
 
   artifacts {

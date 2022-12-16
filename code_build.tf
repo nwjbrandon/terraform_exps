@@ -1,3 +1,9 @@
+resource "aws_codebuild_source_credential" "codebuild_credential" {
+  auth_type   = "PERSONAL_ACCESS_TOKEN"
+  server_type = "GITHUB"
+  token       = var.GITHUB_ACCESS_TOKEN
+}
+
 resource "aws_codebuild_project" "codebuild" {
   name           = "${var.ORGANIZATION_NAMESPACE}-codebuild"
   build_timeout  = "60"
@@ -8,7 +14,11 @@ resource "aws_codebuild_project" "codebuild" {
     type            = "GITHUB"
     location        = var.GITHUB_URL
     git_clone_depth = 1
-    buildspec      = "backend/buildspec.yml"
+    buildspec       = "backend/buildspec.yml"
+    auth {
+      type     = "OAUTH"
+      resource = aws_codebuild_source_credential.codebuild_credential.arn
+    }
   }
 
   artifacts {

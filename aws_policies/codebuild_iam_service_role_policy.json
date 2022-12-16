@@ -4,7 +4,10 @@
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "elasticbeanstalk.amazonaws.com"
+          "Service": [
+            "codebuild.amazonaws.com",
+            "codepipeline.amazonaws.com"
+        ]
       },
       "Effect": "Allow",
       "Sid": ""

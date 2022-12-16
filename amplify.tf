@@ -53,6 +53,6 @@ resource "aws_amplify_branch" "main" {
   framework   = "React"
   stage       = "PRODUCTION"
   environment_variables = {
-    REACT_APP_BASE_URL                     = var.REACT_APP_BASE_URL
+    REACT_APP_BASE_URL = var.REACT_APP_BASE_URL
   }
 }

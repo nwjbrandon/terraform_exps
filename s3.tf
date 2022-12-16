@@ -1,7 +1,5 @@
 #########################
-#                       #
 # Bucket: exported-pdfs #
-#                       #
 #########################
 resource "aws_s3_bucket" "exported-pdfs" {
   bucket = "${var.ORGANIZATION_NAMESPACE}-exported-pdfs"
@@ -60,9 +58,7 @@ data "aws_iam_policy_document" "exported-pdfs_policy_document" {
 }
 
 ##################
-#                #
 # Bucket: images #
-#                #
 ##################
 resource "aws_s3_bucket" "images" {
   bucket = "${var.ORGANIZATION_NAMESPACE}-images"
@@ -137,9 +133,7 @@ data "aws_iam_policy_document" "images_policy_document" {
 }
 
 ######################
-#                    #
 # Bucket: images-dev #
-#                    #
 ######################
 resource "aws_s3_bucket" "images-dev" {
   bucket = "${var.ORGANIZATION_NAMESPACE}-images-dev"
@@ -214,9 +208,7 @@ data "aws_iam_policy_document" "images-dev_policy_document" {
 }
 
 ###############
-#             #
 # Bucket: pdf #
-#             #
 ###############
 resource "aws_s3_bucket" "pdf" {
   bucket = "${var.ORGANIZATION_NAMESPACE}-pdf"
@@ -275,9 +267,7 @@ data "aws_iam_policy_document" "pdf_policy_document" {
 }
 
 ###################
-#                 #
 # Bucket: pdf-dev #
-#                 #
 ###################
 resource "aws_s3_bucket" "pdf-dev" {
   bucket = "${var.ORGANIZATION_NAMESPACE}-pdf-dev"
@@ -336,9 +326,7 @@ data "aws_iam_policy_document" "pdf-dev_policy_document" {
 }
 
 ######################
-#                    #
 # Bucket: pdf-upload #
-#                    #
 ######################
 resource "aws_s3_bucket" "pdf-upload" {
   bucket = "${var.ORGANIZATION_NAMESPACE}-pdf-upload"
@@ -429,9 +417,7 @@ data "aws_iam_policy_document" "pdf-upload_policy_document" {
 }
 
 ##################
-#                #
 # Bucket: static #
-#                #
 ##################
 resource "aws_s3_bucket" "static" {
   bucket = "${var.ORGANIZATION_NAMESPACE}-static"
@@ -489,6 +475,97 @@ data "aws_iam_policy_document" "static_policy_document" {
     resources = [
       aws_s3_bucket.static.arn,
       "${aws_s3_bucket.static.arn}/*",
+    ]
+  }
+}
+
+################################
+# Bucket: terraform-deployment #
+################################
+resource "aws_s3_bucket" "terraform-deployment" {
+  bucket = "${var.ORGANIZATION_NAMESPACE}-terraform-deployment"
+}
+
+resource "aws_s3_bucket_acl" "terraform-deployment_acl" {
+  bucket = aws_s3_bucket.terraform-deployment.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_cors_configuration" "terraform-deployment_cors_configuration" {
+  bucket = aws_s3_bucket.terraform-deployment.id
+
+  cors_rule {
+    allowed_headers = ["*"]
+    allowed_methods = ["GET", "HEAD", "PUT"]
+    allowed_origins = ["*"]
+    expose_headers  = []
+    max_age_seconds = 3000
+  }
+}
+
+resource "aws_s3_bucket_policy" "terraform-deployment_get_objects_policy" {
+  bucket = aws_s3_bucket.terraform-deployment.id
+  policy = data.aws_iam_policy_document.terraform-deployment_policy_document.json
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "terraform-deployment_server_side_encryption_configuration" {
+  bucket = aws_s3_bucket.terraform-deployment.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "AES256"
+    }
+  }
+}
+
+data "aws_iam_policy_document" "terraform-deployment_policy_document" {
+  statement {
+    principals {
+      type        = "*"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:PutObject"
+    ]
+
+    resources = [
+      aws_s3_bucket.terraform-deployment.arn,
+      "${aws_s3_bucket.terraform-deployment.arn}/*",
+    ]
+  }
+
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:GetObject",
+    ]
+
+    resources = [
+      aws_s3_bucket.terraform-deployment.arn,
+      "${aws_s3_bucket.terraform-deployment.arn}/*",
+    ]
+  }
+
+  statement {
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    actions = [
+      "s3:DeleteBucket",
+    ]
+
+    effect = "Deny"
+
+    resources = [
+      aws_s3_bucket.terraform-deployment.arn,
+      "${aws_s3_bucket.terraform-deployment.arn}/*",
     ]
   }
 }

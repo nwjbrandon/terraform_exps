@@ -19,5 +19,5 @@ phases:
   deploy_build:
     commands:
       - echo Deploying the Docker image...
-      - echo "$( jq '.Image.Name = "$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION"' Dockerrun.aws.template.json )" > Dockerrun.aws.json
+      - python3 main.py --image_uri=$IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
       - cat Dockerrun.aws.json

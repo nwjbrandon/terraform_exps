@@ -7,7 +7,7 @@
 terraform validate 
 terraform plan
 ```
-- Deploy
+- Deploy (Deploy lambda last because docker image needs to be uploaded first)
 ```
 terraform deploy
 ```
@@ -37,8 +37,9 @@ psql --host={db_instance_endpoint} --port={port} --username={username} --passwor
 1. Push the docker images to ecr and continue deploying if first attempt failed
 
 ## Not Covered
-1. Create groups
-2. Create domain names and SSL certs
+1. Codepipeline connection
+2. Create groups
+3. Create domain names and SSL certs
 
 ## References
 - https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platforms-supported.html#platforms-supported.docker

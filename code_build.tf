@@ -33,7 +33,7 @@ resource "aws_codebuild_project" "codebuild" {
 
     environment_variable {
       name  = "IMAGE_REPO_NAME"
-      value = aws_ecr_repository.backend.name
+      value = aws_ecr_repository.backend.repository_url
     }
 
     environment_variable {

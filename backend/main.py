@@ -12,6 +12,6 @@ with open("Dockerrun.aws.template.json") as f:
 
 config["Image"]["Name"] = image_uri
 
-with open("Dockerrun.aws.json", "f") as f:
+with open("Dockerrun.aws.json", "w") as f:
     json.dump(config, f, indent=2)
 

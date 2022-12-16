@@ -28,44 +28,44 @@ resource "aws_iam_instance_profile" "eb_iam_ec2_profile" {
   role = aws_iam_role.eb_iam_ec2_role.name
 }
 
-resource "aws_iam_policy_attachment" "eb_managed_updates_customer_role_policy" {
-  name       = "${var.ORGANIZATION_NAMESPACE}_eb_managed_updates_customer_role_policy"
+resource "aws_iam_policy_attachment" "AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy" {
+  name       = "AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy"
   roles      = ["${aws_iam_role.eb_iam_service_role.id}", "${aws_iam_role.codebuild_iam_service_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkManagedUpdatesCustomerRolePolicy"
 }
 
-resource "aws_iam_policy_attachment" "eb_enhanced_health" {
-  name       = "${var.ORGANIZATION_NAMESPACE}_eb_enhanced_health"
+resource "aws_iam_policy_attachment" "AWSElasticBeanstalkEnhancedHealth" {
+  name       = "AWSElasticBeanstalkEnhancedHealth"
   roles      = ["${aws_iam_role.eb_iam_service_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth"
 }
 
-resource "aws_iam_policy_attachment" "eb_ec2_container_registry_full_access" {
-  name       = "${var.ORGANIZATION_NAMESPACE}_eb_ec2_container_registry_full_access"
+resource "aws_iam_policy_attachment" "AmazonEC2ContainerRegistryFullAccess" {
+  name       = "AmazonEC2ContainerRegistryFullAccess"
   roles      = ["${aws_iam_role.eb_iam_ec2_role.id}", "${aws_iam_role.codebuild_iam_service_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryFullAccess"
 }
 
-resource "aws_iam_policy_attachment" "eb_ecr_public_read_only" {
-  name       = "${var.ORGANIZATION_NAMESPACE}_eb_ecr_public_read_only"
+resource "aws_iam_policy_attachment" "AmazonElasticContainerRegistryPublicReadOnly" {
+  name       = "AmazonElasticContainerRegistryPublicReadOnly"
   roles      = ["${aws_iam_role.eb_iam_ec2_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AmazonElasticContainerRegistryPublicReadOnly"
 }
 
-resource "aws_iam_policy_attachment" "eb_web_tier" {
-  name       = "${var.ORGANIZATION_NAMESPACE}_eb_web_tier"
+resource "aws_iam_policy_attachment" "AWSElasticBeanstalkWebTier" {
+  name       = "AWSElasticBeanstalkWebTier"
   roles      = ["${aws_iam_role.eb_iam_ec2_role.id}", "${aws_iam_role.codebuild_iam_service_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier"
 }
 
-resource "aws_iam_policy_attachment" "eb_multicontainer_docker" {
-  name       = "${var.ORGANIZATION_NAMESPACE}_eb_multicontainer_docker"
+resource "aws_iam_policy_attachment" "AWSElasticBeanstalkMulticontainerDocker" {
+  name       = "AWSElasticBeanstalkMulticontainerDocker"
   roles      = ["${aws_iam_role.eb_iam_ec2_role.id}", "${aws_iam_role.codebuild_iam_service_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkMulticontainerDocker"
 }
 
-resource "aws_iam_policy_attachment" "eb_ecr_worker_tier" {
-  name       = "${var.ORGANIZATION_NAMESPACE}_eb_ecr_worker_tier"
+resource "aws_iam_policy_attachment" "AWSElasticBeanstalkWorkerTier" {
+  name       = "AWSElasticBeanstalkWorkerTier"
   roles      = ["${aws_iam_role.eb_iam_ec2_role.id}", "${aws_iam_role.codebuild_iam_service_role.id}"]
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
 }

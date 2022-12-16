@@ -1,0 +1,26 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the docker image...  
+      - cd backend/        
+      - docker build -t $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION .
+      - echo Build completed on `date`
+      - echo Pushing the docker image...
+      - docker push $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+  post_build:
+    commands:
+      - echo Create Dockerrun.aws.json
+      - python3 main.py --image_uri $IMAGE_REPO_NAME:$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - cat Dockerrun.aws.json
+      - echo Deployment started on `date`
+      - echo Deploying the docker image...
+      - aws s3 cp Dockerrun.aws.json s3://$S3_BUCKET/Dockerrun.aws.json
+      - aws elasticbeanstalk create-application-version --application-name $ELASTIC_BEANSTALK_APP --version-label $CODEBUILD_RESOLVED_SOURCE_VERSION --source-bundle S3Bucket=$S3_BUCKET,S3Key=Dockerrun.aws.json
+      - aws elasticbeanstalk update-environment --application-name $ELASTIC_BEANSTALK_APP --environment-name $ELASTIC_BEANSTALK_ENV --version-label=$CODEBUILD_RESOLVED_SOURCE_VERSION

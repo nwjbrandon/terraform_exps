@@ -22,5 +22,5 @@ phases:
       - echo Deployment started on `date`
       - echo Deploying the docker image...
       - aws s3 cp Dockerrun.aws.json s3://$S3_BUCKET/Dockerrun.aws.json
-      - aws elasticbeanstalk create-application-version --application-name "nwjbrandon-app" --version-label $CODEBUILD_RESOLVED_SOURCE_VERSION --source-bundle S3Bucket=$S3_BUCKET,S3Key=Dockerrun.aws.json
-      - aws elasticbeanstalk update-environment --application-name "nwjbrandon-app" --environment-name "nwjbrandon-env-1" --version-label=$CODEBUILD_RESOLVED_SOURCE_VERSION
+      - aws elasticbeanstalk create-application-version --application-name $ELASTIC_BEANSTALK_APP --version-label $CODEBUILD_RESOLVED_SOURCE_VERSION --source-bundle S3Bucket=$S3_BUCKET,S3Key=Dockerrun.aws.json
+      - aws elasticbeanstalk update-environment --application-name $ELASTIC_BEANSTALK_APP --environment-name $ELASTIC_BEANSTALK_ENV --version-label=$CODEBUILD_RESOLVED_SOURCE_VERSION

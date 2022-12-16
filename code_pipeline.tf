@@ -11,11 +11,6 @@ resource "aws_codepipeline" "codepipeline" {
   artifact_store {
     location = aws_s3_bucket.terraform-deployment.bucket
     type     = "S3"
-
-    # encryption_key {
-    #   id   = data.aws_kms_alias.s3kmskey.arn
-    #   type = "KMS"
-    # }
   }
 
   stage {
@@ -31,8 +26,8 @@ resource "aws_codepipeline" "codepipeline" {
 
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.example.arn
-        FullRepositoryId = "nwjbrandon/terraform_exps"
-        BranchName       = "feat/code-pipeline"
+        FullRepositoryId = var.GITHUB_REPO_ID
+        BranchName       = var.GITHUB_BRANCH
       }
     }
   }

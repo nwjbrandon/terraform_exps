@@ -150,5 +150,8 @@ variable "user" {
 variable "GITHUB_URL" {
 }
 
+variable "GITHUB_REPO_ID" {
+}
+
 variable "GITHUB_BRANCH" {
 }

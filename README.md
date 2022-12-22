@@ -34,9 +34,15 @@ redis-cli -c -h {redis_instance_endpoint} -p 6379
 psql --host={db_instance_endpoint} --port={port} --username={username} --password --dbname={database_name}
 ```
 
+## ToDos
+- Change resource name to the following convention
+```
+{Purpose}_{ResourceName}
+```
+
 ## Not Covered
 1. Codepipeline connection
-2. Create groups
+2. Create IAM groups/users
 3. Create domain names and SSL certs
 
 ## References
